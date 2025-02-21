@@ -354,6 +354,17 @@ def get_bet(saldo):
             return bet
 
 
+def print_keno_board():
+    """ Exibe a matriz 8x10 com os números de 1 a 80. """
+    print("\n🎰 TABULEIRO KENO 🎰\n")
+    for row in range(8):  # 8 linhas
+        for col in range(10):  # 10 colunas
+            num = row * 10 + col + 1
+            print(f"{num:2d}", end="  ")  # Imprime o número formatado
+        print()  # Quebra de linha para próxima linha da matriz
+    print()  # Espaço após matriz
+
+
 def choose_numbers():
     """ Permite ao jogador escolher números para o Keno. """
     while True:
@@ -381,10 +392,11 @@ def keno(saldo):
     saldo = saldo
 
     while saldo > 0:
-        print(f"Saldo: R$ {saldo}")
+        print(f"Saldo: R$ {saldo}\n")
         bet = get_bet(saldo)
         player_numbers = choose_numbers()
 
+        print_keno_board()
         print("\n🎲 Sorteando os números... 🎲")
         drawn_numbers = draw_numbers()
         print(f"Números sorteados: {BALL} {', '.join(map(str, drawn_numbers))}\n")
