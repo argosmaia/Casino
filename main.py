@@ -295,6 +295,8 @@ def slots(saldo):
         print(f"Saldo: R$ {saldo}")
         bet = get_bet(saldo)
 
+        tocarSom("Jackpot.mp3")
+
         # Rodando a máquina
         result = spin_reels()
         print("\n🎲 Girando... 🎲")
@@ -360,7 +362,7 @@ def print_keno_board():
     for row in range(8):  # 8 linhas
         for col in range(10):  # 10 colunas
             num = row * 10 + col + 1
-            print(f"{num:2d}", end="  ")  # Imprime o número formatado
+            print(f"| {num:2d} |", end="  ")  # Imprime o número formatado
         print()  # Quebra de linha para próxima linha da matriz
     print()  # Espaço após matriz
 
@@ -391,15 +393,18 @@ def keno(saldo):
 
     saldo = saldo
 
+    print_keno_board()
+
     while saldo > 0:
         print(f"Saldo: R$ {saldo}\n")
         bet = get_bet(saldo)
         player_numbers = choose_numbers()
 
-        print_keno_board()
         print("\n🎲 Sorteando os números... 🎲")
         drawn_numbers = draw_numbers()
         print(f"Números sorteados: {BALL} {', '.join(map(str, drawn_numbers))}\n")
+        drawn_numbers.sort()
+        print(f"Números ordenados: {BALL} {', '.join(map(str, drawn_numbers))}\n")
 
         hits = len(set(player_numbers) & set(drawn_numbers))
         print(f"Você acertou {hits} números! 🎯")
