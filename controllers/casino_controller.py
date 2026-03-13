@@ -1,4 +1,5 @@
 import sys
+import os
 import pygame
 from models.player import Player
 from models.games.blackjack import BlackjackModel
@@ -22,7 +23,8 @@ class CasinoController:
 
     def tocar_som(self, arquivo):
         try:
-            pygame.mixer.music.load(arquivo)
+            caminho = os.path.join("music", arquivo)
+            pygame.mixer.music.load(caminho)
             pygame.mixer.music.play()
         except:
             pass
